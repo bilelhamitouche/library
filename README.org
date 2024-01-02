@@ -1,0 +1,4 @@
+#+TITLE: Library App
+#+AUTHOR: Bilel Hamitouche
+
+This is a simple library website built with HTML, CSS and JavaScript as a part of the Odin Project.
