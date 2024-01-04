@@ -6,5 +6,24 @@
     <link href="style.css" rel="stylesheet"/>
     <script src="script.js" defer></script>
   </head>
-  <body></body>
+  <body>
+    <header>
+      <dialog class="modal">
+	<form class="new-book-form" method="dialog">
+	  <p>Add new Book</p>
+	  <input name="title" type="text" value="" placeholder="Book title" id="title"/>
+	  <input name="author" type="text" value="" placeholder="Book author" id="title"/>
+	  <input name="numberOfPages" type="number" value="" placeholder="Number of pages" id="numberOfPages"/>
+	<button type="submit" class="add-button">Add Book</button>
+	<button class="remove-button">Remove Book</button>
+	</form>
+      </dialog>
+      <nav>
+	<h1>My Library</h1>
+	<button class="new-book">New Book</button>
+      </nav>
+    </header>
+    <main>
+    </main>
+  </body>
 </html>
