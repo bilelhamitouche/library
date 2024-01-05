@@ -4,6 +4,7 @@
     <meta charset="UTF-8"/>
     <title>Library App</title>
     <link href="style.css" rel="stylesheet"/>
+    <link href="icons/favicon.ico" rel="icon"/>
     <script src="script.js" defer></script>
   </head>
   <body>
@@ -12,15 +13,15 @@
 	<form class="new-book-form" method="dialog">
 	  <p>Add new Book</p>
 	  <input name="title" type="text" value="" placeholder="Book title" id="title"/>
-	  <input name="author" type="text" value="" placeholder="Book author" id="title"/>
+	  <input name="author" type="text" value="" placeholder="Book author" id="author"/>
 	  <input name="numberOfPages" type="number" value="" placeholder="Number of pages" id="numberOfPages"/>
+	  <label for="">Have you read it?<input type="checkbox" id="status" /></label>
 	<button type="submit" class="add-button">Add Book</button>
-	<button class="remove-button">Remove Book</button>
 	</form>
       </dialog>
       <nav>
 	<h1>My Library</h1>
-	<button class="new-book">New Book</button>
+	<button class="new-book">Add Book</button>
       </nav>
     </header>
     <main>

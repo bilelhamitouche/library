@@ -1,5 +1,4 @@
 
-
 // book constructor
 const Book = function (title, author, numPages, status) {
   this.title = title;
@@ -14,8 +13,6 @@ Book.prototype.toggleStatus = function () {
 
 // library
 const myLibrary = [];
-const book = new Book('Ral', 'Bilel', 120, 'Read');
-myLibrary.push(book);
 
 // adding book to library
 const addBookToLibrary = (title, author, numPages, status) => {
@@ -24,48 +21,63 @@ const addBookToLibrary = (title, author, numPages, status) => {
     .push(book);
 };
 
+// display a book
+const displayBook = (book) => {
+  const card = document.createElement('div');
+  card.classList = 'card';
+  card.dataset.index = myLibrary.indexOf(book);
+  const cardTitle = document.createElement('p');
+  cardTitle.textContent = book.title;
+  cardTitle.classList = 'card-title';
+  const cardAuthor = document.createElement('p');
+  cardAuthor.textContent = book.author;
+  cardAuthor.classList = 'card-author';
+  const cardNumPages = document.createElement('p');
+  cardNumPages.textContent = book.numPages;
+  cardNumPages.classList = 'card-author';
+  const cardStatus = document.createElement('button');
+  cardStatus.textContent = book.status;
+  cardStatus.classList = 'card-status';
+  const cardRemove = document.createElement('button');
+  cardRemove.textContent = 'Remove';
+  cardRemove.classList = 'card-remove';
+  card.appendChild(cardTitle);
+  card.appendChild(cardAuthor);
+  card.appendChild(cardNumPages);
+  card.appendChild(cardStatus);
+  card.appendChild(cardRemove);
+  main.appendChild(card);
+};
+
 // grabbing the DOM elements
 const main = document.querySelector('main');
 const newBookButton = document.querySelector('.new-book');
 const modal = document.querySelector('.modal');
-const closeModalButton = document.querySelector('.close-button');
+const closeModalButton = document.querySelector('.add-button');
+const form = document.querySelector('.new-book-form');
+const newBookTitle = document.querySelector('#title');
+const newBookAuthor = document.querySelector('#author');
+const newBookNumPage = document.querySelector('#numberOfPages');
+const newBookStatus = document.querySelector('#status');
+const addBookButton = document.querySelector('.add-book');
 
 // event listener for creating a new book
 newBookButton.addEventListener('click', () => {
   modal.showModal();
 });
 
+// event listener for submitting book
+closeModalButton.addEventListener('click', () => {
+  addBookToLibrary(newBookTitle.value, newBookAuthor.value, newBookNumPage.value, newBookStatus.checked ? 'Read' : 'Not Read');
+  modal.close();
+  displayBook(myLibrary[myLibrary.length - 1]);
+});
+
 // display the books on the page
 const displayBooks = function () {
-  myLibrary
-    .forEach(book => {
-      const card = document.createElement('div');
-      card.classList = 'card';
-      card.dataset.index = myLibrary.indexOf(book);
-      const cardTitle = document.createElement('p');
-      cardTitle.textContent = book.title;
-      cardTitle.classList = '.card-title';
-      const cardAuthor = document.createElement('p');
-      cardAuthor.textContent = book.author;
-      cardAuthor.classList = '.card-author';
-      const cardNumPages = document.createElement('p');
-      cardNumPages.textContent = book.numPages;
-      cardNumPages.classList = '.card-author';
-      const cardStatus = document.createElement('div');
-      cardStatus.textContent = book.status;
-      cardStatus.classList = '.card-status';
-      const cardRemove = document.createElement('div');
-      cardRemove.textContent = 'Remove';
-      cardRemove.classList = '.card-remove';
-      card.appendChild(cardTitle);
-      card.appendChild(cardAuthor);
-      card.appendChild(cardNumPages);
-      card.appendChild(cardStatus);
-      card.appendChild(cardRemove);
-      main.appendChild(card);
-    });
+  myLibrary.forEach((book) => {
+    displayBook(book);
+  });
 };
 
-console.log(myLibrary.indexOf(book));
-
-displayBooks();
+window.onload = (event) => displayBooks();
