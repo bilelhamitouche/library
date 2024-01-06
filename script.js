@@ -17,8 +17,7 @@ const myLibrary = [];
 // adding book to library
 const addBookToLibrary = (title, author, numPages, status) => {
   const book = new Book(title, author, numPages, status);
-  myLibrary
-    .push(book);
+  myLibrary.push(book);
 };
 
 // display a book
@@ -47,6 +46,16 @@ const displayBook = (book) => {
   card.appendChild(cardStatus);
   card.appendChild(cardRemove);
   main.appendChild(card);
+  // toggle status event listener
+  cardStatus.addEventListener('click', (event) => {
+    myLibrary[event.target.parentElement.dataset.index].toggleStatus();
+    event.target.textContent = myLibrary[event.target.parentElement.dataset.index].status;
+  });
+  // remove book event listener
+  cardRemove.addEventListener('click', (event) => {
+    main.removeChild(event.target.parentElement);
+    myLibrary.splice(card.dataset.index, 1);
+  });
 };
 
 // grabbing the DOM elements
@@ -60,6 +69,8 @@ const newBookAuthor = document.querySelector('#author');
 const newBookNumPage = document.querySelector('#numberOfPages');
 const newBookStatus = document.querySelector('#status');
 const addBookButton = document.querySelector('.add-book');
+const toggleStatusButton = document.querySelector('.card-status');
+const removeBookButton = document.querySelector('.card-remove');
 
 // event listener for creating a new book
 newBookButton.addEventListener('click', () => {
@@ -72,6 +83,7 @@ closeModalButton.addEventListener('click', () => {
   modal.close();
   displayBook(myLibrary[myLibrary.length - 1]);
 });
+
 
 // display the books on the page
 const displayBooks = function () {
