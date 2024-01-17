@@ -11,8 +11,10 @@ Book.prototype.toggleStatus = function () {
   this.status === 'Read' ? this.status = 'Not Read' : this.status = 'Read';
 };
 
+
 // library
-const myLibrary = [];
+const existingBooks = JSON.parse(localStorage.getItem('todos'));
+const myLibrary = existingBooks || [];
 
 // adding book to library
 const addBookToLibrary = (title, author, numPages, status) => {
@@ -55,6 +57,7 @@ const displayBook = (book) => {
   cardRemove.addEventListener('click', (event) => {
     main.removeChild(event.target.parentElement);
     myLibrary.splice(card.dataset.index, 1);
+    localStorage.setItem('todos', JSON.stringify(myLibrary));
   });
 };
 
@@ -82,6 +85,7 @@ closeModalButton.addEventListener('click', () => {
   addBookToLibrary(newBookTitle.value, newBookAuthor.value, newBookNumPage.value, newBookStatus.checked ? 'Read' : 'Not Read');
   modal.close();
   displayBook(myLibrary[myLibrary.length - 1]);
+  localStorage.setItem('todos', JSON.stringify(myLibrary));
 });
 
 
@@ -93,3 +97,4 @@ const displayBooks = function () {
 };
 
 window.onload = (event) => displayBooks();
+
